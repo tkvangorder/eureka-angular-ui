@@ -29,3 +29,11 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 ## Further help
 
 To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Notes to self: 
+
+`npm install font-awesome` --> installs font-awesome css...which we can import in our global styles.css: 
+
+`@import '../node_modules/font-awesome/css/font-awesome.css'` <-- Which you can now use anywhere in your application: 
+
+`<i class="fa fa-chrome"></i>`
