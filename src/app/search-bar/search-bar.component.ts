@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertModule} from 'ng2-bootstrap/ng2-bootstrap';
+
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss'],
-  
+  styleUrls: ['./search-bar.component.scss']  
 })
 export class SearchBarComponent implements OnInit {
 
