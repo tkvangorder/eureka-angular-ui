@@ -1,6 +1,11 @@
-<div id="search-bar">
-  <input type="text" id="environment" placeholder="Environment"/>
-  <input type="text" id="hostname" placeholder="Host Name"/>
-  <input type="text" id="applicationName" placeholder="Application Name"/>
-  <button id="filter">Filter</button>
+<div id="search-bar" class="container-fluid form-inline">
+  <input class="form-control" type="text" id="environment" placeholder="Environment"/>
+  <input class="form-control" type="text" id="hostname" placeholder="Host Name"/>
+  <input class="form-control" type="text" id="applicationName" placeholder="Application Name"/>
+  <button id="filter" class="btn btn-primary">Filter</button>
+</div>
+<div class="container-fluid">
+  <alert *ngFor="let alert of alerts;let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">
+  {{ alert?.message }}
+</alert>
 </div>
