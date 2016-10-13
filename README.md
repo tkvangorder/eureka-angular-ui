@@ -2,7 +2,13 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.16.
 
-To install the client type : `npm -g angular-cli`
+To get up and running :
+
+
+
+1. Install the angular client : `npm -g angular-cli`
+2. Install node dependencies : `npm install`
+
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
