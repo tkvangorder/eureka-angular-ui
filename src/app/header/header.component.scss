@@ -1,1 +1,16 @@
 $mobile-only: "only screen and (max-width : 768px)";
+
+.row-no-padding {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.headerbar {
+    background-color: #F2F2F2;
+    margin: 0px 0px 0px 0px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-bottom: 4px solid #00aa9e;
+}
