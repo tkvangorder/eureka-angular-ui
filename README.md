@@ -5,9 +5,9 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 To get up and running :
 
 
-
-1. Install the angular client : `npm -g angular-cli`
-2. Install node dependencies : `npm install`
+1. Install Node (4 or higher) & npm (3 or higher). [Node Install Page](https://nodejs.org/en/download/).
+2. Install the angular client : `npm -g angular-cli` (You may need to use "sudo" on a Mac or linux)
+3. Install node dependencies : `npm install`
 
 
 ## Development server
