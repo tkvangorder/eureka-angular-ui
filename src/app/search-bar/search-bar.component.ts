@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Environment } from '../shared/model/Environment';
 
 @Component({
   selector: 'app-search-bar',
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-bar.component.scss']  
 })
 export class SearchBarComponent implements OnInit {
+
+  @Output() onSearch = new EventEmitter<SearchEvent>();
+  searchEvent: SearchEvent = new SearchEvent();
+
+  environmentList : Environment[] = Environment.allEnvironment;
 
   public alerts:Array<Object> = [
     {
@@ -26,4 +32,14 @@ export class SearchBarComponent implements OnInit {
   ngOnInit() {
   }
 
+  public filterResults() {
+    this.onSearch.emit(this.searchEvent);
+    this.addAlert("Environment : " + this.searchEvent.environment + ", hostname = '" + this.searchEvent.hostname + "', applicationName= '" + this.searchEvent.applicationName, "info");
+  }
+}
+
+export class SearchEvent {
+  environment: string;
+  hostname: string;
+  applicationName: string;
 }

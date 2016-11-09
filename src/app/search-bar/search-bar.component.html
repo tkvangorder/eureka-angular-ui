@@ -1,8 +1,10 @@
 <div id="search-bar" class="container-fluid form-inline search-bar">
-  <input class="form-control" type="text" id="environment" placeholder="Environment"/>
-  <input class="form-control" type="text" id="hostname" placeholder="Host Name"/>
-  <input class="form-control" type="text" id="applicationName" placeholder="Application Name"/>
-  <button id="filter" class="btn btn-primary">Filter</button>
+  <select class="form-control" [(ngModel)]="searchEvent.environment">
+    <option *ngFor="let env of environmentList" [value]="env.value">{{env.display}}</option>
+  </select>
+  <input class="form-control" type="text" [(ngModel)]="searchEvent.hostname" placeholder="Host Name"/>
+  <input class="form-control" type="text" [(ngModel)]="searchEvent.applicationName" placeholder="Application Name"/>
+  <button id="filter" class="btn btn-primary" (click)="filterResults()">Filter</button>
 </div>
 <alert *ngFor="let alert of alerts;let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">
   {{ alert?.message }}
