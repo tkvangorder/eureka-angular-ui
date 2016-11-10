@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { EnvironmentService } from './environment.service';
+import { EurekaDataService } from './eureka-data.service';
 
-describe('Service: Environment', () => {
+describe('Service: EurekaData', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [EnvironmentService]
+      providers: [EurekaDataService]
     });
   });
 
-  it('should ...', inject([EnvironmentService], (service: EnvironmentService) => {
+  it('should ...', inject([EurekaDataService], (service: EurekaDataService) => {
     expect(service).toBeTruthy();
   }));
 });

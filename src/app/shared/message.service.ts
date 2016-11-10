@@ -14,7 +14,6 @@ export class MessageService {
     return this._messages.asObservable();
   }
 
-
   public addAlert(message: string, type: string):void {
     var messages:MessageAlert[] = this._messages.getValue(); 
     messages.push(new MessageAlert(message, type, true));

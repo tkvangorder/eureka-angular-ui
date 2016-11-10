@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Environment} from '../shared/environment';
 import { EnvironmentService } from '../shared/environment.service';
 import { MessageService } from '../shared/message.service';
+import { EurekaDataService } from '../shared/eureka-data.service';
 
 
 @Component({
@@ -11,9 +12,10 @@ import { MessageService } from '../shared/message.service';
 })
 export class SearchBarComponent implements OnInit {
 
-  constructor(environmentService:EnvironmentService, messageService:MessageService) {
-    this.environmentService = environmentService;
-    this.messageService = messageService;
+  constructor(
+    private environmentService:EnvironmentService,
+    private messageService:MessageService,
+    private eurekaDataService:EurekaDataService) {
   }
 
   ngOnInit() {
@@ -21,9 +23,6 @@ export class SearchBarComponent implements OnInit {
 
   @Output() onSearch = new EventEmitter<SearchEvent>();
   searchEvent: SearchEvent = new SearchEvent();
-  
-  environmentService : EnvironmentService;
-  messageService : MessageService;
   
   public alerts:Array<Object> = [
     {
@@ -41,8 +40,8 @@ export class SearchBarComponent implements OnInit {
   }
 
   public filterResults() {
-    this.onSearch.emit(this.searchEvent);
     this.addAlert("Environment : " + this.searchEvent.environment + ", hostname = '" + this.searchEvent.hostname + "', applicationName= '" + this.searchEvent.applicationName, "info");
+    let instances:Object[] = this.eurekaDataService.fetchEurekaInstances();
   }
 }
 
