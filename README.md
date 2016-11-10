@@ -11,8 +11,8 @@ To get up and running :
 
 
 ## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
+Run `ng serve -proxy-config proxy-config.json` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Note: The `proxy-config.json` will proxy all calls to /eureka/app/* to an external eureka server. See this file to change which Eureka server you are using during development.
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
@@ -40,8 +40,3 @@ To get more help on the `angular-cli` use `ng --help` or go check out the [Angul
 
 ## Notes to self: 
 
-`npm install font-awesome` --> installs font-awesome css...which we can import in our global styles.css: 
-
-`@import '../node_modules/font-awesome/css/font-awesome.css'` <-- Which you can now use anywhere in your application: 
-
-`<i class="fa fa-chrome"></i>`

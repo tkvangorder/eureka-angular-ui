@@ -12,6 +12,10 @@ import { EurekaDataService } from '../shared/eureka-data.service';
 })
 export class SearchBarComponent implements OnInit {
 
+  environment: string;
+  hostname: string;
+  applicationName: string;
+
   constructor(
     private environmentService:EnvironmentService,
     private messageService:MessageService,
@@ -20,17 +24,7 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  @Output() onSearch = new EventEmitter<SearchEvent>();
-  searchEvent: SearchEvent = new SearchEvent();
   
-  public alerts:Array<Object> = [
-    {
-      type: 'info',
-      message: 'Enter Criteria to find matching services.'
-    }
-  ];
-
   public closeAlert(i:number):void {
     this.messageService.closeAlert(i);
   }
@@ -40,13 +34,8 @@ export class SearchBarComponent implements OnInit {
   }
 
   public filterResults() {
-    this.addAlert("Environment : " + this.searchEvent.environment + ", hostname = '" + this.searchEvent.hostname + "', applicationName= '" + this.searchEvent.applicationName, "info");
-    let instances:Object[] = this.eurekaDataService.fetchEurekaInstances();
+    this.addAlert("Environment : " + this.environment + ", hostname = '" + this.hostname + "', applicationName= '" + this.applicationName, "info");
+    this.eurekaDataService.fetchEurekaInstances(this.environment, this.hostname, this.applicationName);
   }
-}
-
-export class SearchEvent {
-  environment: string;
-  hostname: string;
-  applicationName: string;
+  
 }

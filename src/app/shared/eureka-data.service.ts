@@ -2,31 +2,72 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response} from '@angular/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MessageService } from './message.service';
+import { EurekaInstance } from './eureka-instance';
 
 @Injectable()
 export class EurekaDataService {
 
-  private eurekaUrl: string;
+ private _eurekaInstances : BehaviorSubject<EurekaInstance[]>;
+
+ private eurekaUrl: string;
+ private environment: string;
+ private hostname: string;
+ private application: string;
 
   constructor(private http: Http, private messageService: MessageService) {
-    this.eurekaUrl = "http://eureka-test-1.build.internal:8761/eureka/apps";
+    this.eurekaUrl = "/eureka/apps";
+    this._eurekaInstances =  <BehaviorSubject<EurekaInstance[]>>new BehaviorSubject([]);        
   }
 
-  public fetchEurekaInstances():Object[] {
+  public get eurekaInstances() {
+    return this._eurekaInstances.asObservable();
+  }
+
+  public fetchEurekaInstances(environment: string, hostname:string, application:string) {
+    this.environment = environment;
+    this.hostname = hostname;
+    this.application = application;
+
+    let url = this.eurekaUrl;
+    if (application != null && application.length > 0) {
+      url = url + "/" + application;
+    }
     let headers = new Headers({'Accept' : 'application/json'});
-    let instances:Object[];
     this.http.get(this.eurekaUrl,{headers: headers}).map(this.extractData).subscribe(
-      data => instances = data,
+      data => this.filterResults(data),
       error => this.handleError(error));
-    return instances;
   }
 
- private extractData(response: Response) {
+  private filterResults(applications:any) {
+    //Extract matching instances from each application:
+    let instances = new Array<EurekaInstance>();
+    applications.forEach(application => 
+      instances = instances.concat(
+        application.instance.filter(item => {
+        if (this.environment != null && this.environment.length > 0) {
+          if (item.metadata == null || item.metadata.environment == null || item.metadata.environment != this.environment) {
+            //Environment does not match filter.
+            return false;
+          }
+        }
+        if (this.hostname != null && this.hostname.length > 0) {
+
+          if (item.metadata == null || item.metadata.hostname == null || item.metadata.hostname != this.hostname) {
+            return false;
+          }
+        }
+        return true;
+      }
+      )));
+    
+    this._eurekaInstances.next(instances); 
+  }
+  private extractData(response: Response) {
     let body = response.json();
-    return body.data || { };
+    return body.applications.application || { };
   }
 
-  private handleError (error: Response | any) {
+  private handleError (error: Response | any):Observable<{}> {
     // In a real world app, we might use a remote logging infrastructure
     let errorMessage: string;
     if (error instanceof Response) {
@@ -39,4 +80,5 @@ export class EurekaDataService {
     this.messageService.addAlert(errorMessage, "error");
     return Observable.throw(errorMessage);
   }
+  
 }

@@ -1,0 +1,7 @@
+{
+  "/eureka/apps": {
+    "target": "http://eureka-test-1.build.internal:8761",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
