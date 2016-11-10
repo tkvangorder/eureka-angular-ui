@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Environment } from '../shared/model/Environment';
+import { Environment} from '../shared/environment';
+import { EnvironmentService } from '../shared/environment.service';
+import { MessageService } from '../shared/message.service';
+
 
 @Component({
   selector: 'app-search-bar',
@@ -8,11 +11,20 @@ import { Environment } from '../shared/model/Environment';
 })
 export class SearchBarComponent implements OnInit {
 
+  constructor(environmentService:EnvironmentService, messageService:MessageService) {
+    this.environmentService = environmentService;
+    this.messageService = messageService;
+  }
+
+  ngOnInit() {
+  }
+
   @Output() onSearch = new EventEmitter<SearchEvent>();
   searchEvent: SearchEvent = new SearchEvent();
-
-  environmentList : Environment[] = Environment.allEnvironment;
-
+  
+  environmentService : EnvironmentService;
+  messageService : MessageService;
+  
   public alerts:Array<Object> = [
     {
       type: 'info',
@@ -21,15 +33,11 @@ export class SearchBarComponent implements OnInit {
   ];
 
   public closeAlert(i:number):void {
-    this.alerts.splice(i, 1);
+    this.messageService.closeAlert(i);
   }
 
-  public addAlert(message: String, type: String):void {
-    this.alerts.push({message: message, type: type, closable: true});
-  }
-  constructor() { }
-
-  ngOnInit() {
+  public addAlert(message: string, type: string):void {
+    this.messageService.addAlert(message, type);
   }
 
   public filterResults() {

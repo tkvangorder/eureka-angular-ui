@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SearchResultsComponent } from './search-results/search-results.componen
     BrowserModule,
     FormsModule,
     HttpModule,
-    AlertModule
+    AlertModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
