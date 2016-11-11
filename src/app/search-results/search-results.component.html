@@ -1,3 +1,28 @@
-<p>
-  search-results works!
-</p>
+<div id="search-bar" class="container-fluid form-inline">
+<table class="table table-striped">
+    <thead class="thead-inverse">
+    <tr>
+        <th>Environment</th>
+        <th>Application</th>
+        <th>Host (*Local Host)</th>
+        <th>IP Address</th>    
+        <th>Instance ID</th>    
+        <th>Home Page</th>    
+        <th>Status Page</th>    
+        <th>Health Check</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let instance of eurekaDataService.eurekaInstances | async">
+        <td>{{instance.environment}}</td>
+        <td>{{instance.applicationName}}</td>
+        <td>{{instance.hostName}}</td>
+        <td>{{instance.ipAddress}}</td>    
+        <td><a href="/eureka/instances/{{instance.instanceId}}">{{instance.instanceId}}</a></td> 
+        <td><a href="{{instance.homePageUrl}}">Home</a></td>    
+        <td><a href="{{instance.statusPageUrl}}">Status</a></td>    
+        <td><a href="{{instance.healthCheckUrl}}">Health</a></td>    
+    </tr>
+    </tbody>
+</table>
+<b>* If a service is registered in the local environment, the host in parathesis is the one used to pair clients to servers.</b>

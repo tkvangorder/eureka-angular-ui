@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Environment} from '../shared/environment';
 import { EnvironmentService } from '../shared/environment.service';
 import { MessageService } from '../shared/message.service';
@@ -34,7 +34,6 @@ export class SearchBarComponent implements OnInit {
   }
 
   public filterResults() {
-    this.addAlert("Environment : " + this.environment + ", hostname = '" + this.hostname + "', applicationName= '" + this.applicationName, "info");
     this.eurekaDataService.fetchEurekaInstances(this.environment, this.hostname, this.applicationName);
   }
   
