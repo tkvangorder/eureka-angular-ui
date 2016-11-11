@@ -28,13 +28,14 @@ Note: The `proxy-config.json` will proxy all calls to /eureka/app/* to an extern
 The project already contains a VS Code launch configuration file with two launch tasks: 
 - "Launch Chrome against localhost with source maps" - This launch will start a new instance of chrome and automatically navigate to the application running on port 4200. **Note: On a Mac, I had to kill all instances of Chrome on my machine to have this work correctly**
 - "Attach to Chrome with source maps" - This launch will attach to an existing instance of Chrome, if chrome is running with its remote debugging enabled. 
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build. The artifacts that are generated in the dist folder can be directly copied into a spring boot application's "src/main/resources/static"
 
 ## Running unit tests
 
