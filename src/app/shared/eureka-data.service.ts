@@ -109,11 +109,19 @@ export class EurekaDataService {
       instance.statusPageUrl = item.statusPageUrl;
       instance.healthCheckUrl = item.healthCheckUrl;
       if (item.metadata != null) {
-        instance.environment = item.metadata.environment;
         if (item.metadata.localHostName != null) {
           instance.hostName = instance.hostName + " (" + item.metadata.localHostName + ")";
         }
-        instance.version = item.metadata.version;
+        if (item.metadata.environment != null) {
+          instance.environment = item.metadata.environment;
+        } 
+        if (item.metadata.version != null) {
+          //encode version into environment.
+          if (instance.environment != null) {
+            instance.environment = instance.environment + " (" + item.metadata.version + ")";
+          } 
+          instance.version = item.metadata.version;
+        }
       }
       return instance;
     });

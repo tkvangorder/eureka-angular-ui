@@ -24,6 +24,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.filterResults();
   }
   
   public closeAlert(i:number):void {
