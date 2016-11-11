@@ -1,10 +1,9 @@
 <div id="search-bar" class="container-fluid form-inline search-bar">
-  <select class="form-control" [(ngModel)]="environment">
+  <select name="environment" class="form-control" [(ngModel)]="environment" (ngModelChange)="filterResults()">
     <option *ngFor="let env of environmentService.allEnvironments | async" [value]="env.value">{{env.display}}</option>
   </select>
-  <input class="form-control" type="text" [(ngModel)]="hostname" placeholder="Host Name"/>
-  <input class="form-control" type="text" [(ngModel)]="applicationName" placeholder="Application Name"/>
-  <button id="filter" class="btn btn-primary" (click)="filterResults()">Filter</button>
+  <input name="hostname" class="form-control" type="text" [(ngModel)]="hostname" placeholder="Host Name" (change)="filterResults()"/>
+  <input name="applicationName" class="form-control" type="text" [(ngModel)]="applicationName" placeholder="Application Name" (change)="filterResults()"/>
 </div>
 <alert *ngFor="let alert of messageService.currentMessages | async;let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">
   {{ alert?.message }}

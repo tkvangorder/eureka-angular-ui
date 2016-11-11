@@ -14,5 +14,8 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  public sort(expression:string) {
+    this.eurekaDataService.setSortExpress(expression);
+    this.eurekaDataService.fetchEurekaInstances();
+  } 
 }

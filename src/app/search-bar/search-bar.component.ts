@@ -20,6 +20,7 @@ export class SearchBarComponent implements OnInit {
     private environmentService:EnvironmentService,
     private messageService:MessageService,
     private eurekaDataService:EurekaDataService) {
+      this.environment = "";
   }
 
   ngOnInit() {
@@ -34,7 +35,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   public filterResults() {
-    this.eurekaDataService.fetchEurekaInstances(this.environment, this.hostname, this.applicationName);
+    this.eurekaDataService.setAndFetchEurekaInstances(this.environment, this.hostname, this.applicationName);
   }
   
 }
